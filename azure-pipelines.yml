@@ -19,3 +19,13 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+## Deploy Serverless
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Charles Internal MS Subscription(7d5e5232-ee02-4d7c-a647-8e24177bb973)'
+    appType: 'webAppLinux'
+    appName: 'CRPHelloWorldWebApp'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'NODE|12-lts'
+    startUpCommand: 'node index.js'
