@@ -16,26 +16,3 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
-
-## Deploy Serverless
-
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Charles Internal MS Subscription(7d5e5232-ee02-4d7c-a647-8e24177bb973)'
-    appType: 'webAppLinux'
-    appName: 'CRPHelloWorldWebApp'
-    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    runtimeStack: 'NODE|12-lts'
-    startUpCommand: 'node index.js'
