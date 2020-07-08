@@ -12,5 +12,9 @@ app.get('/', (req, res) => {
   res.send('Hello World. Yay devops!');
 });
 
+app.get('/status', function(req, res) {
+  res.json({ message: 'API is up and running'}); 
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
